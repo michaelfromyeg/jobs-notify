@@ -18,7 +18,7 @@ if __name__ == "__main__":
     load_dotenv()
 
     # Get the current time; check the previous day
-    time = (datetime.now() - timedelta(days=3)).isoformat()
+    time = (datetime.now() - timedelta(days=1)).isoformat()
 
     count = 0
     html_list = []

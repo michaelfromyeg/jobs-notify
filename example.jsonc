@@ -1,0 +1,82 @@
+/*
+ * This is an example payload from the GitHub API, for reference. Useful for debugging or adding features.
+ */
+{
+    "sha": "638e2f9f52318850bff212d2a9441b721d2779dd",
+    "node_id": "MDY6Q29tbWl0MjY2NDE3NzcyOjYzOGUyZjlmNTIzMTg4NTBiZmYyMTJkMmE5NDQxYjcyMWQyNzc5ZGQ=",
+    "commit": {
+        "author": {
+            "name": "Apinan Yogaratnam",
+            "email": "72412733+apinanyogaratnam@users.noreply.github.com",
+            "date": "2021-06-27T23: 04: 22Z"
+        },
+        "committer": {
+            "name": "Apinan Yogaratnam",
+            "email": "72412733+apinanyogaratnam@users.noreply.github.com",
+            "date": "2021-06-27T23: 04: 22Z"
+        },
+        "message": "added salesforce swe internship to readme",
+        "tree": {
+            "sha": "167214446806edb742eb107a3e89f433f6c32163",
+            "url": "https: //api.github.com/repos/pittcsc/Summer2022-Internships/git/trees/167214446806edb742eb107a3e89f433f6c32163"
+        },
+        "url": "https://api.github.com/repos/pittcsc/Summer2022-Internships/git/commits/638e2f9f52318850bff212d2a9441b721d2779dd",
+        "comment_count": 0,
+        "verification": {
+            "verified": "False",
+            "reason": "unsigned",
+            "signature": "None",
+            "payload": "None"
+        }
+    },
+    "url": "https://api.github.com/repos/pittcsc/Summer2022-Internships/commits/638e2f9f52318850bff212d2a9441b721d2779dd",
+    "html_url": "https://github.com/pittcsc/Summer2022-Internships/commit/638e2f9f52318850bff212d2a9441b721d2779dd",
+    "comments_url": "https://api.github.com/repos/pittcsc/Summer2022-Internships/commits/638e2f9f52318850bff212d2a9441b721d2779dd/comments",
+    "author": {
+        "login": "apinanyogaratnam",
+        "id": 72412733,
+        "node_id": "MDQ6VXNlcjcyNDEyNzMz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/72412733?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/apinanyogaratnam",
+        "html_url": "https://github.com/apinanyogaratnam",
+        "followers_url": "https://api.github.com/users/apinanyogaratnam/followers",
+        "following_url": "https://api.github.com/users/apinanyogaratnam/following{/other_user}",
+        "gists_url": "https://api.github.com/users/apinanyogaratnam/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/apinanyogaratnam/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/apinanyogaratnam/subscriptions",
+        "organizations_url": "https://api.github.com/users/apinanyogaratnam/orgs",
+        "repos_url": "https://api.github.com/users/apinanyogaratnam/repos",
+        "events_url": "https://api.github.com/users/apinanyogaratnam/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/apinanyogaratnam/received_events",
+        "type": "User",
+        "site_admin": "False"
+    },
+    "committer": {
+        "login": "apinanyogaratnam",
+        "id": 72412733,
+        "node_id": "MDQ6VXNlcjcyNDEyNzMz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/72412733?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/apinanyogaratnam",
+        "html_url": "https://github.com/apinanyogaratnam",
+        "followers_url": "https://api.github.com/users/apinanyogaratnam/followers",
+        "following_url": "https://api.github.com/users/apinanyogaratnam/following{/other_user}",
+        "gists_url": "https://api.github.com/users/apinanyogaratnam/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/apinanyogaratnam/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/apinanyogaratnam/subscriptions",
+        "organizations_url": "https://api.github.com/users/apinanyogaratnam/orgs",
+        "repos_url": "https://api.github.com/users/apinanyogaratnam/repos",
+        "events_url": "https://api.github.com/users/apinanyogaratnam/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/apinanyogaratnam/received_events",
+        "type": "User",
+        "site_admin": "False"
+    },
+    "parents": [
+        {
+            "sha": "52b945a7b59f67cc45c2f83e3315ff585564ebea",
+            "url": "https://api.github.com/repos/pittcsc/Summer2022-Internships/commits/52b945a7b59f67cc45c2f83e3315ff585564ebea",
+            "html_url": "https://github.com/pittcsc/Summer2022-Internships/commit/52b945a7b59f67cc45c2f83e3315ff585564ebea"
+        }
+    ]
+}

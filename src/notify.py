@@ -1,15 +1,9 @@
-import smtplib, ssl, os, requests
+import os, requests
+from local import send_email
+from data import fetch_jobs
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
-# The list of repositories to target
-repos = (
-    "pittcsc/Summer2022-Internships",
-    "quantprep/quantinternships2022",
-    "ChrisDryden/Canadian-Tech-Internships-Summer-2022",
-)
 
 DEBUG = False
 
@@ -19,34 +13,10 @@ def main() -> None:
     Send email with the latest internship postings.
     """
 
-    # Load environment variables from project root
-    load_dotenv()
-
     # Get the current time; check the previous day
     time = (datetime.now() - timedelta(days=1)).isoformat()
 
-    count = 0
-    html_list = []
-    plaintext_list = []
-    for repo in repos:
-        for res in requests.get(
-            f"https://api.github.com/repos/{repo}/commits?since={time}",
-            headers={"Accept": "application/vnd.github.v3+json"},
-        ).json():
-            if DEBUG:
-                print(f"Updated commit {res}")
-            plaintext_list.append(
-                f"{repo}: {res['commit']['message']} <{res['html_url']}> by {res['commit']['author']['name']} on {res['commit']['author']['date']}"
-            )
-            html_list.append(
-                f"<li>{repo}: <a href=\"{res['html_url']}\">{res['commit']['message']}</a> by {res['commit']['author']['name']} on {res['commit']['author']['date']}</li>"
-            )
-            count += 1
-
-    print(f"There were {count} commits made!")
-
-    message = MIMEMultipart("alternative")
-    message["Subject"] = f"[jobs-notify] New internship postings! ({time[0:10]})"
+    [plaintext_list, html_list] = fetch_jobs(time)
 
     # Produce the formatted email
     plaintext_email = """\
@@ -83,32 +53,9 @@ def main() -> None:
         to_name=os.environ["TO_NAME"], html_list="".join(html_list)
     )
 
-    # Turn plaintext, HTML into MIMEText objects
-    part1 = MIMEText(plaintext_email, "plain")
-    part2 = MIMEText(html_email, "html")
+    subject = f"[jobs-notify] New internship postings! ({time[0:10]})"
 
-    # The email client will try to render the last part first, i.e., the HTML
-    message.attach(part1)
-    message.attach(part2)
-
-    if count > 0:
-        with smtplib.SMTP_SSL(
-            os.environ["MAIL_SERVER"],
-            os.environ["MAIL_PORT"],
-            context=ssl.create_default_context(),
-        ) as server:
-            # Enable debugging
-            if DEBUG:
-                server.set_debuglevel(2)
-
-            # Send email
-            server.login(os.environ["MAIL_USERNAME"], os.environ["MAIL_PASSWORD"])
-            server.sendmail(
-                os.environ["FROM_EMAIL"], os.environ["TO_EMAIL"], message.as_string()
-            )
-
-            # Print the email we sent
-            print(f"Sent the following email:\n{plaintext_email}")
+    send_email(subject=subject, plaintext_email=plaintext_email, html_email=html_email)
 
 
 if __name__ == "__main__":

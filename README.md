@@ -56,3 +56,5 @@ sed 's/=.*/=/' .env > .env.example
 I'm looking to deploy this on AWS and make it a publicly available newsletter. I'm planning on using Lambda, SES, and SQS.
 
 If this sounds of interest to you, please let me know!
+
+> AWS Lambda can be scheduled to run at definite intervals. Generate the data (details for email) to be sent as JSON. Push the json into SQS. Use another AWS Lambda to read the SQS to send emails in batches.

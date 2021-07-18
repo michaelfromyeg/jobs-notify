@@ -13,7 +13,12 @@ repos = (
 
 DEBUG = False
 
-if __name__ == "__main__":
+
+def main() -> None:
+    """
+    Send email with the latest internship postings.
+    """
+
     # Load environment variables from project root
     load_dotenv()
 
@@ -41,7 +46,7 @@ if __name__ == "__main__":
     print(f"There were {count} commits made!")
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = f"[jobs-notify] New internship postings! ({time[0:9]})"
+    message["Subject"] = f"[jobs-notify] New internship postings! ({time[0:10]})"
 
     # Produce the formatted email
     plaintext_email = """\
@@ -104,3 +109,7 @@ if __name__ == "__main__":
 
             # Print the email we sent
             print(f"Sent the following email:\n{plaintext_email}")
+
+
+if __name__ == "__main__":
+    main()

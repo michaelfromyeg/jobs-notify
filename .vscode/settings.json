@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "crontab": "shellscript",
+    },
+    "cSpell.enabled": true,
+    "cSpell.words": [
+        "Gmail",
+        "dotenv",
+        "pittcsc",
+        "quantinternships",
+        "quantprep",
+        "repos",
+        "smtplib",
+        "venv"
+    ]
+}

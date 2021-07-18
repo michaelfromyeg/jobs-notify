@@ -1,1 +1,1 @@
-30 08 10 06 * ~/code/jobs-notify/jobs-notify.sh
+0 8 * * * ~/code/jobs-notify/jobs-notify.sh

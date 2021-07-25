@@ -2,8 +2,6 @@ import os, requests
 from local import send_email
 from data import fetch_jobs
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
-
 
 DEBUG = False
 

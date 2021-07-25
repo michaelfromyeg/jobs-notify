@@ -45,10 +45,58 @@ The included `jobs-notify.bat` file should be run every 24 hours. This [blog pos
 
 ## Notes 📝
 
+### `.env`
+
 To update the `.env.example` file, run
 
 ```shellscript
 sed 's/=.*/=/' .env > .env.example
+```
+
+### AWS
+
+> AWS Lambda can be scheduled to run at definite intervals. Generate the data (details for email) to be sent as JSON. Push the json into SQS. Use another AWS Lambda to read the SQS to send emails in batches.
+
+Use [localstack](https://github.com/localstack/localstack) to test with `docker run --rm -it -p 4566:4566 -p 4571:4571 localstack/localstack` or simply `docker-compose up`.
+
+To interact with AWS services, use the `--endpoint-url` with the AWS CLI with `localhost:4566`. For example, `aws --endpoint-url=http://localhost:4566 kinesis list-streams.`
+
+If you get an error like "unable to locate credentials", run
+
+```shellscript
+$ aws configure --profile default
+AWS Access Key ID [****************test]: test
+AWS Secret Access Key [****************test]: test
+Default region name [None]: us-west-2 # or any other region
+Default output format [None]:
+$ aws --endpoint-url=http://localhost:4566 kinesis list-streams
+{
+    "StreamNames": []
+}
+$ aws --endpoint-url=http://localhost:4566 lambda list-functions
+{
+    "Functions": []
+}
+```
+
+Steps to create AWS resources:
+
+```
+$ aws --endpoint-url=http://localhost:4572 s3 mb s3://tutorial
+$ aws --endpoint-url=http://localhost:4572 s3api put-object --bucket tutorial --key lambda
+{
+    "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\""
+}
+$ aws --endpoint-url=http://localhost:4572 s3 cp ./test/files/ s3://tutorial/lambda/ --recursive
+$ aws --endpoint-url=http://localhost:4576 sqs create-queue --queue-name lambda-tutorial
+$ aws lambda create-function \
+    --region ${REGION} \
+    --function-name ${API_NAME} \
+    --runtime nodejs8.10 \
+    --handler lambda.apiHandler \
+    --memory-size 128 \
+    --zip-file fileb://api-handler.zip \
+    --role arn:aws:iam::123456:role/irrelevant
 ```
 
 ## Next Steps ⏩
@@ -56,5 +104,3 @@ sed 's/=.*/=/' .env > .env.example
 I'm looking to deploy this on AWS and make it a publicly available newsletter. I'm planning on using Lambda, SES, and SQS.
 
 If this sounds of interest to you, please let me know!
-
-> AWS Lambda can be scheduled to run at definite intervals. Generate the data (details for email) to be sent as JSON. Push the json into SQS. Use another AWS Lambda to read the SQS to send emails in batches.

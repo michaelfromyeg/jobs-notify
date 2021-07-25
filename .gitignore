@@ -1,5 +1,6 @@
-# .zip exports
+# build/ exports
 build/*.zip
+build/response.json
 
 # Environment variables
 .env

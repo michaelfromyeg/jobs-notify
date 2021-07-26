@@ -1,16 +1,13 @@
-import os, requests
-from local import send_email
+import os
 from data import fetch_jobs
 from datetime import datetime, timedelta
+from typing import Tuple
 
-DEBUG = False
 
-
-def main() -> None:
+def generate_email() -> Tuple[str, str, str]:
     """
-    Send email with the latest internship postings.
+    Generate content for email
     """
-
     # Get the current time; check the previous day
     time = (datetime.now() - timedelta(days=1)).isoformat()
 
@@ -53,8 +50,4 @@ def main() -> None:
 
     subject = f"[jobs-notify] New internship postings! ({time[0:10]})"
 
-    send_email(subject=subject, plaintext_email=plaintext_email, html_email=html_email)
-
-
-if __name__ == "__main__":
-    main()
+    return [subject, plaintext_email, html_email]

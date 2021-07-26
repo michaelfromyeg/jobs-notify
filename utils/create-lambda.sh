@@ -16,7 +16,10 @@ pip install --target ../package -r ../requirements.txt
 cd ../package; zip -r ../build/lambda.zip .; cd ../utils
 
 # Add lambda.py and data.py to dependencies
-cd ../src; zip -g ../build/lambda.zip lambda.py data.py; cd ../utils
+cd ../src; zip -g ../build/lambda.zip lambda.py data.py notify.py email.html; cd ../utils
+
+# Add dotenv
+cd ..; zip -g ./build/lambda.zip .env; cd ./utils
 
 # Create lambda
 aws lambda create-function \
@@ -28,6 +31,12 @@ aws lambda create-function \
     --memory-size 128 \
     --zip-file fileb:///home/mdema/code/jobs-notify/build/lambda.zip \
     --role arn:aws:iam::000000000000:role/lambda-ex
+
+# TODO: integrate into above call instead of copying dotenv
+# aws lambda update-function-configuration
+#    --endpoint-url=http://localhost:4566 \
+#    --function-name my-function \
+#    --environment "Variables={BUCKET=my-bucket,KEY=file.txt}"
 
 # Clean up export
 rm -rf ../package

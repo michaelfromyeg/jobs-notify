@@ -1,5 +1,4 @@
 import requests
-from dotenv import load_dotenv
 from typing import List, Tuple
 
 # The list of repositories to target
@@ -9,16 +8,11 @@ repos = (
     "ChrisDryden/Canadian-Tech-Internships-Summer-2022",
 )
 
-DEBUG = True
-
 
 def fetch_jobs(time: str) -> Tuple[List[str], List[str]]:
     """
     Send email with the latest internship postings.
     """
-    # Load environment variables from project root
-    load_dotenv()
-
     # The number of new commits
     count = 0
 
@@ -34,9 +28,6 @@ def fetch_jobs(time: str) -> Tuple[List[str], List[str]]:
             api_url, headers={"Accept": "application/vnd.github.v3+json"}
         ).json()
         for commit in commits:
-            if DEBUG:
-                print(f"Updated commit {commit}")
-
             commit_message: str = commit["commit"]["message"]
             commit_url: str = commit["html_url"]
             commit_author: str = commit["commit"]["author"]["name"]

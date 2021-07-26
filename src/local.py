@@ -1,9 +1,23 @@
 import smtplib, ssl, os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+from notify import generate_email
 
 DEBUG = True
+
+
+def main() -> None:
+    """
+    Send email via local machine with the latest internship postings.
+    """
+    load_dotenv(find_dotenv())
+
+    [subject, plaintext_email, html_email] = generate_email()
+
+    send_email(subject=subject, plaintext_email=plaintext_email, html_email=html_email)
+
+    return None
 
 
 def send_email(subject: str, plaintext_email: str, html_email: str) -> None:
@@ -41,3 +55,7 @@ def send_email(subject: str, plaintext_email: str, html_email: str) -> None:
 
         # Print the email we sent
         print(f"Sent the following email:\n{plaintext_email}")
+
+
+if __name__ == "__main__":
+    main()
